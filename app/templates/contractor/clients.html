@@ -1,0 +1,53 @@
+﻿{% extends "layouts/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>Список клиентов</h1>
+    
+    {% if clients %}
+        <div class="clients-list">
+            <table class="clients-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>мя пользователя</th>
+                        <th>Email</th>
+                        <th>ата регистрации</th>
+                        <th>ействия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for client in clients %}
+                    <tr>
+                        <td>{{ client.id }}</td>
+                        <td>{{ client.username }}</td>
+                        <td>{{ client.email }}</td>
+                        <td>{{ client.created_at.strftime('%d.%m.%Y %H:%M') }}</td>
+                        <td>
+                            <form action="{{ url_for('main.delete_user', user_id=client.id) }}" method="POST" style="display: inline;">
+                                <button type="submit" class="btn-delete" onclick="return confirm('далить пользователя {{ client.username }}?')" title="далить пользователя">
+                                    🗑️
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p>лиентов пока нет.</p>
+    {% endif %}
+    
+    <div class="clients-actions" style="margin-top: 30px;">
+        <a href="{{ url_for('auth.register') }}" class="btn btn-primary">
+            ➕ обавить пользователя
+        </a>
+        <a href="{{ url_for('main.dashboard') }}" class="btn btn-secondary">
+            ← ернуться в кабинет
+        </a>
+    </div>
+</div>
+{% endblock %}

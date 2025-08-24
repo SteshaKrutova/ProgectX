@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Мониторинг Сервис{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav style="background: #343a40; padding: 1rem; color: white;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <a href="{{ url_for('main.dashboard') }}" style="color: white; text-decoration: none; font-weight: bold;">
+                Мониторинг Сервис
+            </a>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                {% if current_user.is_authenticated %}
+                    <span>Привет, {{ current_user.username }}!</span>
+                    <a href="{{ url_for('auth.register') }}" style="color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 4px; background: #28a745;">
+                        + Новый пользователь
+                    </a>
+                    <a href="{{ url_for('auth.logout') }}" style="color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 4px; background: #dc3545;">
+                        Выйти
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('auth.login') }}" style="color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 4px; background: #6c757d;">
+                        Вход
+                    </a>
+                    <a href="{{ url_for('auth.register') }}" style="color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 4px; background: #007bff;">
+                        Регистрация
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

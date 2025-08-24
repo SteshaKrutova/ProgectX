@@ -1,0 +1,32 @@
+﻿{% extends "layouts/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>личный кабинет клиента</h1>
+    <p>добро пожаловать, {{ current_user.username }}!</p>
+    
+    <div class="dashboard-grid">
+        <div class="dashboard-card">
+            <h3>📊 мои услуги</h3>
+            <p>просмотр подключенных услуг</p>
+        </div>
+        
+        <div class="dashboard-card">
+            <h3>📞 поддержка</h3>
+            <p>обращения в техническую поддержку</p>
+        </div>
+        
+        <div class="dashboard-card">
+            <h3>💳 баланс</h3>
+            <p>управление балансом и платежами</p>
+        </div>
+        
+        <div class="dashboard-card">
+            <h3>📊 статистика</h3>
+            <p>статистика работы услуг</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
