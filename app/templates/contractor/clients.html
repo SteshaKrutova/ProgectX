@@ -5,17 +5,16 @@
 {% block content %}
 <div class="dashboard">
     <h1>Список клиентов</h1>
-    
     {% if clients %}
         <div class="clients-list">
             <table class="clients-table">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>мя пользователя</th>
+                        <th>Имя пользователя</th>
                         <th>Email</th>
-                        <th>ата регистрации</th>
-                        <th>ействия</th>
+                        <th>Дата регистрации</th>
+                        <th>Действия</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,16 +37,13 @@
             </table>
         </div>
     {% else %}
-        <p>лиентов пока нет.</p>
+        <p>Клиентов пока нет.</p>
     {% endif %}
     
-    <div class="clients-actions" style="margin-top: 30px;">
-        <a href="{{ url_for('auth.register') }}" class="btn btn-primary">
-            ➕ обавить пользователя
-        </a>
-        <a href="{{ url_for('main.dashboard') }}" class="btn btn-secondary">
-            ← ернуться в кабинет
-        </a>
-    </div>
+    <div class="clients-actions" style="margin-top: 30px; text-align: right;">
+    <a href="{{ url_for('auth.register') }}" class="btn btn-primary action-btn">
+        ➕ Добавить пользователя
+    </a>
+</div>
 </div>
 {% endblock %}

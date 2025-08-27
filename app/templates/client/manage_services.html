@@ -1,0 +1,95 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>Управление услугами</h1>
+    
+    <!-- Таблица с услугами -->
+    <table class="services-table">
+        <thead>
+            <tr>
+                <th>Название услуги</th>
+                <th>Цена</th>
+                <th>Состояние</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Услуга 1: Мониторинг погоды -->
+            <tr id="service-row-1">
+                <td>Мониторинг погоды</td>
+                <td>10</td>
+                <td>
+                    <label class="custom-toggle">
+                        <input type="checkbox" checked onchange="toggleService(1)">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </td>
+                <td>
+                    <span class="settings-icon">⚙️</span>
+                </td>
+            </tr>
+
+            <!-- Услуга 2: Пинг сервера -->
+            <tr id="service-row-2">
+                <td>Пинг сервера</td>
+                <td>10</td>
+                <td>
+                    <label class="custom-toggle">
+                        <input type="checkbox" onchange="toggleService(2)">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </td>
+                <td>
+                    <span class="settings-icon">⚙️</span>
+                </td>
+            </tr>
+
+            <!-- Услуга 3: Порт чекер -->
+            <tr id="service-row-3">
+                <td>Порт чекер</td>
+                <td>10</td>
+                <td>
+                    <label class="custom-toggle">
+                        <input type="checkbox" checked onchange="toggleService(3)">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </td>
+                <td>
+                    <span class="settings-icon">⚙️</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- JavaScript для обработки переключения -->
+<script>
+function toggleService(serviceId) {
+    const isChecked = event.target.checked;
+    const row = document.getElementById(`service-row-${serviceId}`);
+    const cells = row.getElementsByTagName('td'); // Получаем все ячейки строки
+
+    if (isChecked) {
+        // Включено: возвращаем обычный цвет текста
+        Array.from(cells).forEach(cell => {
+            cell.style.color = ''; // Сбрасываем стиль на значение по умолчанию
+        });
+    } else {
+        // Выключено: делаем текст серым
+        Array.from(cells).forEach(cell => {
+            cell.style.color = '#999'; // Серый цвет
+        });
+    }
+
+    // Здесь можно добавить AJAX-запрос для отправки состояния на сервер
+    // fetch(`/toggle_service/${serviceId}`, {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ is_active: isChecked })
+    // });
+}
+</script>
+{% endblock %}
